@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 80px;
+}
+
+.recipe-container {
+  list-style: none;
+}
+
+.item-container {
+  max-width: 30%;
+  background-color: #ffecd1;
+  border-radius: 1rem;
+}
