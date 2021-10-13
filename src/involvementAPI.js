@@ -33,24 +33,6 @@ class LikesAPI {
     });
 }
 
-const sendToApi = async (id, name) => {
- /*
-    //const comment;
-  const commentData = { id, name, comment };
-
-  try {
-    await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(commentData),
-    });
-    console.log(body);
-  } catch (error) {
-    throw new Error(error.message);
-  }*/
-};
 
 class commentsApi {
 
@@ -58,11 +40,26 @@ class commentsApi {
   
         if(resolve) {
             return resolve(
-            fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/saW1s3gzIypFllIkOa1E/likes`,
+            fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/saW1s3gzIypFllIkOa1E/comments?item_id=${item}`,
             )
             .then((res) => res.json())
             .then((json) => json)
             
+            )
+
+          } return reject();
+    });
+
+    static postComment = (datos) => new Promise((resolve, reject) =>{
+        if(resolve) {
+            return resolve(
+                fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/saW1s3gzIypFllIkOa1E/comments`, {
+                    method: 'POST',
+                    body: JSON.stringify(datos),
+                    headers: {
+                      'Content-type': 'application/json; charset=UTF-8',
+                    },
+                    })           
             )
 
           } return reject();

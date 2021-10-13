@@ -8,14 +8,60 @@ const footer = document.getElementsByClassName("py-3");
 const comments = ['one', 'two', 'three'];
 
 
+
 const popUp = () => {
     const container = document.createElement('section');
     const popupCont = document.createElement('div');
     const popupBox = document.createElement('div');
     const title = document.createElement('h4');
     const photo = document.createElement('IMG');
-    const textCont = document.createElement('div');
-    const heartCont = document.createElement('h1');
+
+    popupBox.classList.add('ml-auto', 'mr-auto', 'pb-5');
+    popupBox.append(title, photo);
+
+    const commentCont = document.createElement('div');
+    const dataList = document.createElement('ul');
+    const commentlist = document.createElement('ul');
+    const commentsTitle = document.createElement('h3');
+    commentsTitle.innerHTML = 'Comments';
+    commentlist.appendChild(commentsTitle)
+
+    commentCont.classList.add('text-justify');
+    commentCont.append(dataList, commentlist);
+
+    popupCont.classList.add('p-3', 'm-2', 'd-flex', 'flex-column');
+    popupCont.append(popupBox, commentCont);
+
+    const socialCont = document.createElement('div');
+
+    const formCont = document.createElement('form');
+
+    
+    formCont.setAttribute("id","form");
+
+
+      
+
+
+    const formInside = document.createElement('div');
+    const buttonCont = document.createElement('div');
+
+    const button = document.createElement('button');
+    button.innerHTML += 'Add Comment';
+    button.classList.add('nav-link', 'comment-btn', 'align-middle', 'p-1');
+
+    buttonCont.classList.add('column', 'pt-4');
+    buttonCont.appendChild(button);
+
+    const nameInput = document.createElement('input');
+    nameInput.setAttribute('id', 'nameInput');
+    nameInput.setAttribute('placeholder', 'Name');
+    nameInput.classList.add('form-control', 'm-2');
+    const commentArea = document.createElement('textarea');
+    commentArea.setAttribute('id', 'comment');
+    commentArea.setAttribute('placeholder', 'Leave a comment');
+    commentArea.classList.add('form-control', 'm-2', 'form-c');
+
 
     ApiData.randomMeal().then((data) => {
         let info = data.meals[0];
@@ -24,6 +70,8 @@ const popUp = () => {
         let foodTag = info.strTags;
         let numero = info.idMeal;
         let instructions = info.strInstructions;
+
+
         title.innerHTML += foodName;
         title.classList.add('text-center');
         
@@ -34,7 +82,7 @@ const popUp = () => {
         if(foodTag !== null) {
         const splitTags = foodTag.split(",");
         splitTags.forEach(tag => {
-            const tagCont = document.createElement('span');
+            const tagCont = document.createElement('h4');
             tagCont.innerHTML += `#${tag} `;
             comm.appendChild(tagCont);
         })
@@ -42,11 +90,12 @@ const popUp = () => {
             comm.innerHTML += 'Delicious Food';
         }
 
-        list.appendChild(comm);
+        dataList.appendChild(comm);
 
+        /*
         commentsApi.fetchRecipes(numero).then((data) => {
-            console.log(data);
-        });
+            //console.log(data);
+        });*/
 
         const ingred = document.createElement('li');
         let ingredients = [
@@ -104,80 +153,36 @@ const popUp = () => {
         });
 
         
-        list.appendChild(ingred);
+        dataList.appendChild(ingred);
 
 
         const inst = document.createElement('li');
         inst.innerHTML += `${instructions}`;
-        list.appendChild(inst);
+        dataList.appendChild(inst);
 
 
-        //const commentBox = document.createElement('li');
 
         let array = Object.entries(info);
 
+        formCont.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputInformation = {
+                "id": numero,
+                "username": nameInput.value,
+                "comment": commentArea.value
+            }
+            console.log(inputInformation);
+            commentsApi.postComment(inputInformation);
+            
+          });
         
     });
-
-
-
-    heartCont.classList.add('float-left');
-    heartCont.innerHTML += '<i class="fas fa-heart"></i>';
-
-    const likesCounter = document.createElement('h4');
-    likesCounter.classList.add('float-right');
-    likesCounter.innerHTML += 'X Likes';
-
-    textCont.classList.add('clearfix', 'pt-5');
-    textCont.append(heartCont, likesCounter);
-
-    popupBox.classList.add('ml-auto', 'mr-auto', 'pb-5');
-    popupBox.append(title, photo, textCont);
-
-    const commentCont = document.createElement('div');
-    const list = document.createElement('ul');
-
-
-    commentCont.classList.add('text-justify');
-    commentCont.appendChild(list);
-
-    popupCont.classList.add('p-3', 'm-2', 'd-flex', 'flex-column');
-    popupCont.append(popupBox, commentCont);
-
-    const socialCont = document.createElement('div');
-
-    const formCont = document.createElement('form');
-
     
-    formCont.setAttribute("id","form");
-
-
-    const formInside = document.createElement('div');
-    const buttonCont = document.createElement('div');
-
-    const button = document.createElement('button');
-    button.innerHTML += 'Add Comment';
-    button.classList.add('nav-link', 'comment-btn', 'align-middle', 'p-1');
-
-    buttonCont.classList.add('column', 'pt-4');
-    buttonCont.appendChild(button);
-
-    const userInput = document.createElement('textarea');
-    const commentArea = document.createElement('textarea');
-    commentArea.setAttribute('id', 'comment');
-    commentArea.classList.add('form-control', 'ml-2', 'ml-2', 'form-c');
-
-    /*
-    formCont.addEventListener('submit', (e) => {
-        e.preventDefault();
-        //wrapper.innerHTML = '';
-        sendToApi();
-        //fillRank();
-      });
-      */
+    
+      
 
     formInside.classList.add('row');
-    formInside.append(buttonCont, commentArea);
+    formInside.append(buttonCont, nameInput, commentArea);
 
     formCont.classList.add('p-2');
     formCont.appendChild(formInside);
