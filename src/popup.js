@@ -24,14 +24,28 @@ const popUp = () => {
         let foodTag = info.strTags;
         let numero = info.idMeal;
         let instructions = info.strInstructions;
-
+        console.log(data);
         title.innerHTML += foodName;
         title.classList.add('text-center');
-    
+        
+        //console.log(splitTags);
         photo.src = foodImg;
 
         const comm = document.createElement('li');
-        comm.innerHTML += `${foodTag}`;
+        
+        if(foodTag !== null) {
+        const splitTags = foodTag.split(",");
+        console.log(splitTags, splitTags.length);
+        splitTags.forEach(tag => {
+            const tagCont = document.createElement('p');
+            tagCont.innerHTML += `#${tag}`;
+            //console.log(hashtag);
+            comm.appendChild(tagCont);
+        })
+        }else{
+            comm.innerHTML += 'Delicious Food';
+        }
+
         list.appendChild(comm);
 
 
@@ -78,10 +92,8 @@ const popUp = () => {
             [info.strIngredient20,
             info.strMeasure20]            
         ]
-        ingredients.forEach(element => 
-            console.log(element[0]));
+
         const filteredIng = ingredients.filter(ingredient => ingredient[0] !== '');
-        console.log('filtereding', filteredIng);
         
 
         filteredIng.forEach(element => {
@@ -101,7 +113,6 @@ const popUp = () => {
         list.appendChild(inst);
 
         let array = Object.entries(info);
-        console.log(array);
 
         
     });
