@@ -1,13 +1,14 @@
 import './popupStyle.css';
 import ApiData from './mealAPI.js';
+import {LikesAPI } from './involvementAPI';
+import commentsApi from './involvementAPI';
 
 const wrapper = document.querySelector(".main-container");
 const footer = document.getElementsByClassName("py-3");                                                               
 const comments = ['one', 'two', 'three'];
+
+
 const popUp = () => {
-
-
-
     const container = document.createElement('section');
     const popupCont = document.createElement('div');
     const popupBox = document.createElement('div');
@@ -16,7 +17,6 @@ const popUp = () => {
     const textCont = document.createElement('div');
     const heartCont = document.createElement('h1');
 
-
     ApiData.randomMeal().then((data) => {
         let info = data.meals[0];
         let foodName = info.strMeal;
@@ -24,22 +24,18 @@ const popUp = () => {
         let foodTag = info.strTags;
         let numero = info.idMeal;
         let instructions = info.strInstructions;
-        console.log(data);
         title.innerHTML += foodName;
         title.classList.add('text-center');
         
-        //console.log(splitTags);
         photo.src = foodImg;
 
         const comm = document.createElement('li');
         
         if(foodTag !== null) {
         const splitTags = foodTag.split(",");
-        console.log(splitTags, splitTags.length);
         splitTags.forEach(tag => {
-            const tagCont = document.createElement('p');
-            tagCont.innerHTML += `#${tag}`;
-            //console.log(hashtag);
+            const tagCont = document.createElement('span');
+            tagCont.innerHTML += `#${tag} `;
             comm.appendChild(tagCont);
         })
         }else{
@@ -48,6 +44,9 @@ const popUp = () => {
 
         list.appendChild(comm);
 
+        commentsApi.fetchRecipes(numero).then((data) => {
+            console.log(data);
+        });
 
         const ingred = document.createElement('li');
         let ingredients = [
@@ -112,6 +111,9 @@ const popUp = () => {
         inst.innerHTML += `${instructions}`;
         list.appendChild(inst);
 
+
+        //const commentBox = document.createElement('li');
+
         let array = Object.entries(info);
 
         
@@ -143,18 +145,36 @@ const popUp = () => {
     popupCont.append(popupBox, commentCont);
 
     const socialCont = document.createElement('div');
+
     const formCont = document.createElement('form');
+
+    
+    formCont.setAttribute("id","form");
+
+
     const formInside = document.createElement('div');
     const buttonCont = document.createElement('div');
 
     const button = document.createElement('button');
+    button.innerHTML += 'Add Comment';
     button.classList.add('nav-link', 'comment-btn', 'align-middle', 'p-1');
 
     buttonCont.classList.add('column', 'pt-4');
     buttonCont.appendChild(button);
 
+    const userInput = document.createElement('textarea');
     const commentArea = document.createElement('textarea');
+    commentArea.setAttribute('id', 'comment');
     commentArea.classList.add('form-control', 'ml-2', 'ml-2', 'form-c');
+
+    /*
+    formCont.addEventListener('submit', (e) => {
+        e.preventDefault();
+        //wrapper.innerHTML = '';
+        sendToApi();
+        //fillRank();
+      });
+      */
 
     formInside.classList.add('row');
     formInside.append(buttonCont, commentArea);
@@ -169,7 +189,6 @@ const popUp = () => {
     wrapper.appendChild(container);
 
 }
-
 
 
 export { popUp };

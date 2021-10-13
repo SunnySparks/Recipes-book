@@ -9,7 +9,6 @@ class ApiData {
       }
       return reject();
     });
-  }
-  
-export default ApiData;
+}
 
+export default ApiData;
