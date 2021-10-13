@@ -39,21 +39,28 @@ export default async function displayList(likedRecipes) {
     li.id = index;
     n = counter(n);
     recipeMainContainer.innerHTML = `
-      <h4 class="text-center">${recipe.foodName}</h4>
+      <h4 class="text-center recipe-title">${recipe.foodName}</h4>
       <img src="${recipe.foodImg}" alt="" class="food-img img-thumbnail">
-      <div class="clearfix">
-          <span class="float-left">
-              <i id="like-button" class="fas fa-heart"></i>
-          </span>
-          <span id="like-counter" class="float-right">
-              ${recipe.likes} Likes
-          </span>
-      </div>`;
+    `;
     aboutRecipeContainer.classList.add('tex-justify');
     aboutRecipeContainer.innerHTML = `
-          <p>${recipe.foodTag}</p>
-      <button id="comment-button" type="button" class="nav-link badge">Comments</button>`;
-
+          <div class="recipe-des">
+            <li class="tag-container">
+              <p>${recipe.foodTag}</p>
+            </li>
+            <div class="recipe-likes">
+              <span class="float-right">
+                <i id="like-button" class="fas fa-heart"></i>
+              </span>
+              <span id="like-counter" class="float-right">
+                ${recipe.likes} Likes
+              </span>
+            </div>
+          </div>
+      <button id="comment-button" type="button" class="nav-link badge">Comments</button>
+      <button id="comment-button" type="button" class="nav-link badge">Reservations</button>
+      `;
+    aboutRecipeContainer.classList.add('description');
     li.appendChild(recipeMainContainer);
     li.appendChild(aboutRecipeContainer);
     ul.appendChild(li);

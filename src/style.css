@@ -19,3 +19,60 @@ body {
   background-color: #343a40;
   border-radius: 1rem;
 }
+
+.recipe-title {
+  font-style: italic;
+  margin-bottom: 3vh;
+}
+
+.food-img {
+  border-radius: 1rem;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+}
+
+.description > button {
+  width: 50%;
+  align-self: center;
+  padding: 5px;
+  margin-top: 15px;
+  border-radius: 1rem;
+  border: none;
+}
+
+#like-button {
+  padding-left: 10px;
+  font-size: 1.5rem;
+  color: red;
+}
+
+.recipe-des {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+.recipe-des > li {
+  max-width: 60%;
+  list-style: circle;
+  margin-left: 10px;
+}
+
+.recipe-des > li > p {
+  display: flex;
+  line-break: anywhere;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.recipe-likes {
+  display: flex;
+  flex-direction: column;
+  float: right;
+}
