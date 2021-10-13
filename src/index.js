@@ -17,19 +17,39 @@ const refreshLikes = (foodId, index) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  displayList(likedRecipes);
-  const likeButtons = document.querySelectorAll('#like-button');
-
-  likeButtons.forEach((btn, index) => {
-    const { foodId } = likedRecipes[index];
-    btn.addEventListener('click', async () => {
-      await LikesAPI.giveLike(APP_ID, foodId).then((data) => {
-        if (data === 201) {
-          refreshLikes(foodId, index);
+  const recipesAmount = document.querySelector('#recipes');
+  displayList(likedRecipes).then((data) => {
+    recipesAmount.innerText = `Recipes (${data})`;
+    const likeCounter = document.querySelectorAll('#like-counter');
+    likeCounter.forEach(async (counter, index) => {
+      const { foodId } = likedRecipes[index];
+      await LikesAPI.refreshItemLikes(APP_ID, foodId).then((data) => {
+        if (data !== undefined) {
+          counter.innerText = `${data.likes} Likes`;
+          likedRecipes[index].likes = data.likes;
+          setLocalStorage(likedRecipes);
+        } else {
+          data = 0;
+          likedRecipes[index].likes = data;
         }
-      }).then(setTimeout(() => {
-        document.location.reload();
-      }, 1200));
+      });
+    });
+    const likeButtons = document.querySelectorAll('#like-button');
+    likeButtons.forEach((btn, index) => {
+      const { foodId } = likedRecipes[index];
+      btn.addEventListener('click', async () => {
+        await LikesAPI.giveLike(APP_ID, foodId)
+          .then((data) => {
+            if (data === 201) {
+              refreshLikes(foodId, index);
+            }
+          })
+          .then(
+            setTimeout(() => {
+              document.location.reload();
+            }, 1500),
+          );
+      });
     });
   });
 });

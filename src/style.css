@@ -1,7 +1,13 @@
+body {
+  color: white;
+  background-image: url('./img/bg-image.png');
+}
+
 .container {
   display: flex;
   justify-content: center;
   padding-bottom: 80px;
+  padding-top: 40px;
 }
 
 .recipe-container {
@@ -10,6 +16,6 @@
 
 .item-container {
   max-width: 30%;
-  background-color: #ffecd1;
+  background-color: #343a40;
   border-radius: 1rem;
 }

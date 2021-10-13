@@ -5,11 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style/style.css">
     <title>Wbpack Exercise</title>
 <script defer src="main.js"></script></head>
 <body>
-    <h1>Hello webpack!</h1>
+    <header class="navbar-expand header rounded pb-4">
+        <nav class="navbar d-flex justify-content-between bg-dark border border-dark">
+            <a href="#" class="navbar-brand flex-row text-white">Recipe App</a>
+            <ul id="nav-items" class="navbar-nav flex-row">
+                <li class="nav-item p-2">
+                    <a href="#" class="nav-link text-white">My Recipes</a>
+                </li>
+                <li class="nav-item p-2">
+                    <a href="#" class="nav-link text-white">Search Dishes</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container">
+    </main>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top fixed-bottom bg-secondary">
+        <div class="col-md-4 d-flex align-items-center">
+          <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+          </a>
+          <span class="text-white">Created by Sunny - Rami - Copyright - 2021</span>
+        </div>
+  </footer>
 </body>
 </html>
 
