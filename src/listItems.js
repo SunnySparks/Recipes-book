@@ -1,8 +1,9 @@
 import ApiData from './mealAPI';
 import { setLocalStorage } from './loadStorage';
+import counter from './counterItem';
 
 export default async function displayList(likedRecipes) {
-  let counter = 0;
+  let n = 0;
   const mainContainer = document.querySelector('.main-container');
   const listContainer = document.createElement('div');
   const ul = document.createElement('ul');
@@ -36,7 +37,7 @@ export default async function displayList(likedRecipes) {
     ul.classList.add('recipe-container');
     li.classList.add('item-container', 'p-3', 'm-2', 'd-flex', 'flex-column');
     li.id = index;
-    counter += 1;
+    n = counter(n);
     recipeMainContainer.innerHTML = `
       <h4 class="text-center">${recipe.foodName}</h4>
       <img src="${recipe.foodImg}" alt="" class="food-img img-thumbnail">
@@ -60,5 +61,5 @@ export default async function displayList(likedRecipes) {
 
   listContainer.appendChild(ul);
   mainContainer.appendChild(listContainer);
-  return counter;
+  return n;
 }

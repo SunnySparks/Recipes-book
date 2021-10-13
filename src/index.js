@@ -4,7 +4,6 @@ import displayList from './listItems';
 import LikesAPI from './involvementAPI';
 import { getLocalStorage, setLocalStorage } from './loadStorage';
 
-// const APP_ID = 'VyejpXSV5hDfcxFprl8o';
 const APP_ID = 'saW1s3gzIypFllIkOa1E';
 
 const likedRecipes = getLocalStorage();
