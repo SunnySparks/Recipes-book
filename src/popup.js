@@ -2,11 +2,12 @@ import './popupStyle.css';
 import ApiData from './mealAPI.js';
 import {LikesAPI } from './involvementAPI';
 import commentsApi from './involvementAPI';
+import { lint } from 'stylelint';
 
 const wrapper = document.querySelector(".main-container");
 const footer = document.getElementsByClassName("py-3");                                                               
 const comments = ['one', 'two', 'three'];
-
+const appID = 'saW1s3gzIypFllIkOa1E';
 
 
 const popUp = () => {
@@ -62,13 +63,15 @@ const popUp = () => {
     commentArea.setAttribute('placeholder', 'Leave a comment');
     commentArea.classList.add('form-control', 'm-2', 'form-c');
 
-
-    ApiData.randomMeal().then((data) => {
+    
+    ApiData.getMeal('52796').then((data) => {
+    //ApiData.randomMeal().then((data) => {
         let info = data.meals[0];
         let foodName = info.strMeal;
         let foodImg = info.strMealThumb;
         let foodTag = info.strTags;
         let numero = info.idMeal;
+        console.log(numero);
         let instructions = info.strInstructions;
 
 
@@ -92,10 +95,16 @@ const popUp = () => {
 
         dataList.appendChild(comm);
 
-        /*
-        commentsApi.fetchRecipes(numero).then((data) => {
-            //console.log(data);
-        });*/
+        
+        commentsApi.fetchRecipes(numero, appID).then((data) => {
+            console.log(data);
+            data.forEach(comment => {
+                const commentwrapper = document.createElement('li');
+                /*commentwrapper.innerHTML += `
+                `<li class="text-center"></li>*/
+                console.log(data.creation_date);
+            })
+        });
 
         const ingred = document.createElement('li');
         let ingredients = [
@@ -167,12 +176,12 @@ const popUp = () => {
         formCont.addEventListener('submit', (e) => {
             e.preventDefault();
             const inputInformation = {
-                "id": numero,
+                "item_id": numero,
                 "username": nameInput.value,
                 "comment": commentArea.value
             }
             console.log(inputInformation);
-            commentsApi.postComment(inputInformation);
+            commentsApi.postComment(inputInformation, appID);
             
           });
         
