@@ -33,8 +33,4 @@ class LikesAPI {
   });
 }
 
-<<<<<<< HEAD
 module.exports = LikesAPI;
-=======
-module.exports = LikesAPI;
->>>>>>> development
