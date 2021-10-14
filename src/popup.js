@@ -7,8 +7,10 @@ const wrapper = document.querySelector('.main-container');
 // const footer = document.getElementsByClassName('py-3');
 // const comments = ['one', 'two', 'three'];
 const appID = 'saW1s3gzIypFllIkOa1E';
+const header = document.getElementsByClassName('header');
 
 const popUp = () => {
+
   const container = document.createElement('section');
   const popupCont = document.createElement('div');
   const popupBox = document.createElement('div');
@@ -63,7 +65,6 @@ const popUp = () => {
     const foodImg = info.strMealThumb;
     const foodTag = info.strTags;
     const numero = info.idMeal;
-    console.log(numero);
     const instructions = info.strInstructions;
 
     title.innerHTML += foodName;
@@ -87,8 +88,6 @@ const popUp = () => {
     dataList.appendChild(comm);
 
     commentsApi.fetchRecipes(numero, appID).then((data) => {
-      console.log(data);
-      console.log(data.length);
       data.forEach((comment) => {
         
         commentsTitle.innerHTML = `Comments(${data.length})`;
@@ -164,16 +163,25 @@ const popUp = () => {
 
     // const array = Object.entries(info);
 
-    formCont.addEventListener('submit', (e) => {
+    /*formCont.addEventListener('submit', (e) => {
       e.preventDefault();
       const inputInformation = {
         item_id: numero,
         username: nameInput.value,
         comment: commentArea.value,
       };
-      console.log(inputInformation);
       commentsApi.postComment(inputInformation, appID);
-    });
+    });*/
+
+    button.addEventListener('click', async () => { 
+        const inputInformation = {
+            item_id: numero,
+            username: nameInput.value,
+            comment: commentArea.value,
+          };
+        await commentsApi.postComment(inputInformation, appID); })
+        .then( setTimeout(() => { 
+            document.location.reload(); }, 1500), );
   });
 
   formInside.classList.add('row');
