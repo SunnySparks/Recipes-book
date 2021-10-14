@@ -4,8 +4,6 @@ import ApiData from './mealAPI';
 import commentsApi from './commentsAPI';
 
 const wrapper = document.querySelector('.main-container');
-// const footer = document.getElementsByClassName('py-3');
-// const comments = ['one', 'two', 'three'];
 const appID = 'saW1s3gzIypFllIkOa1E';
 
 const popUp = () => {
@@ -58,7 +56,6 @@ const popUp = () => {
   commentArea.classList.add('form-control', 'm-2', 'form-c');
 
   ApiData.getMeal('52796').then((data) => {
-    // ApiData.randomMeal().then((data) => {
     const info = data.meals[0];
     const foodName = info.strMeal;
     const foodImg = info.strMealThumb;
@@ -161,18 +158,6 @@ const popUp = () => {
     const inst = document.createElement('li');
     inst.innerHTML += `${instructions}`;
     dataList.appendChild(inst);
-
-    // const array = Object.entries(info);
-
-    /* formCont.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const inputInformation = {
-        item_id: numero,
-        username: nameInput.value,
-        comment: commentArea.value,
-      };
-      commentsApi.postComment(inputInformation, appID);
-    }); */
 
     button.addEventListener('click', async () => {
       const inputInformation = {
