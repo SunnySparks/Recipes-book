@@ -39,6 +39,7 @@
 .popup-info {
   display: flex;
   flex-direction: column;
+  padding-right: 40px;
 }
 
 .popup-tags {
@@ -100,4 +101,8 @@ footer {
 
 ul {
   list-style-type: none;
+}
+
+.fa-times-circle {
+  font-size: 30px;
 }

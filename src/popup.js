@@ -26,7 +26,7 @@ const popUp = (foodId) => {
     footer.classList.add('d-flex');
     footer.classList.remove('d-none');
     listItemsContainer.classList.remove('recipe-section');
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflowY = 'scroll';
   });
 
   popupBox.classList.add('ml-auto', 'mr-auto', 'pb-5');
@@ -72,10 +72,12 @@ const popUp = (foodId) => {
   buttonCont.appendChild(button);
 
   const nameInput = document.createElement('input');
+  nameInput.required = true;
   nameInput.setAttribute('id', 'nameInput');
   nameInput.setAttribute('placeholder', 'Name');
   nameInput.classList.add('form-control', 'm-2');
   const commentArea = document.createElement('textarea');
+  commentArea.required = true;
   commentArea.setAttribute('id', 'comment');
   commentArea.setAttribute('placeholder', 'Leave a comment');
   commentArea.classList.add('form-control', 'm-2', 'form-c');
