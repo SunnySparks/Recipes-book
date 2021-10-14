@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .then(
             setTimeout(() => {
               document.location.reload();
-            }, 1500)
+            }, 1500),
           );
       });
     });
@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
     commentButtons.forEach((btn, index) => {
       const { foodId } = likedRecipes[index];
       btn.addEventListener('click', async () => {
-        // console.log(`Passing parameter Food Id: ${foodId}`);
-      })
-    })
+        console.log(`Passing parameter Food Id: ${foodId}`);
+      });
+    });
   });
 
   randomDishesBtn.addEventListener('click', async () => {
@@ -69,5 +69,5 @@ document.addEventListener('DOMContentLoaded', () => {
   recipesPageBtn.addEventListener('click', async () => {
     const listItemsContainer = document.querySelector('.container');
     await listItemsContainer.classList.remove('d-none');
-  })
+  });
 });
