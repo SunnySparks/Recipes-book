@@ -53,13 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
           );
       });
     });
-    const commentButtons = document.querySelectorAll('#comment-button');
-    commentButtons.forEach((btn, index) => {
-      const { foodId } = likedRecipes[index];
-      btn.addEventListener('click', async () => {
-        console.log(`Passing parameter Food Id: ${foodId}`);
-      });
-    });
   });
 
   randomDishesBtn.addEventListener('click', async () => {

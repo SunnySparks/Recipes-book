@@ -4,13 +4,16 @@ import counter from './counterItem';
 
 export default async function displayList(likedRecipes) {
   let n = 0;
+  const max = 30;
+  const min = 3;
+  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   const mainContainer = document.querySelector('.main-container');
   const listContainer = document.createElement('div');
   const ul = document.createElement('ul');
 
   if (likedRecipes.length <= 0) {
     const foodTag = 'Awesome Food';
-    for (let i = 0; i < 9; i += 1) {
+    for (let i = 0; i < randomNumber; i += 1) {
       /* eslint-disable no-await-in-loop */
       await ApiData.randomMeal().then((data) => {
         const Food = {
