@@ -13,6 +13,24 @@ const popUp = (foodId) => {
   const popupBox = document.createElement('div');
   const title = document.createElement('h4');
   const photo = document.createElement('IMG');
+  const close = document.createElement('div');
+  close.classList.add('text-right');
+  close.setAttribute('id', 'close-button');
+  close.innerHTML += '<i class="far fa-times-circle"></i>';
+
+  const footer = document.querySelector('.footer');
+  const listItemsContainer = document.querySelector('.container');
+
+  close.addEventListener('click', async () => {
+    parentContainer.remove();
+    footer.classList.add('d-flex');
+    footer.classList.remove('d-none');
+    listItemsContainer.classList.remove('recipe-section');
+    document.body.style.overflow = 'scroll';
+  });
+
+  popupBox.classList.add('ml-auto', 'mr-auto', 'pb-5');
+  popupBox.append(close, title, photo);
 
   parentContainer.classList.add('parent-container');
   title.classList.add('popup-title');
