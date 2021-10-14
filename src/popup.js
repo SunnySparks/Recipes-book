@@ -1,7 +1,7 @@
 import './popupStyle.css';
 
 import ApiData from './mealAPI';
-import commentsApi from './involvementAPI';
+import commentsApi from './commentsAPI';
 
 const wrapper = document.querySelector('.main-container');
 // const footer = document.getElementsByClassName('py-3');
