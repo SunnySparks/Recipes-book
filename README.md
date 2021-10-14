@@ -41,8 +41,12 @@ To get a local copy up and running follow these simple example steps.
 
  Run `npx stylelint "**/*.{css,scss}"` for style linters.
 
-<!-- ### Live Demo Server -->
+### Live Demo Server
 
+
+### Video of the Project:
+
+- [Recipes Book Video](https://www.loom.com/share/a17c8a33438f4214bd56ae5a3f84a672)
 
 ## Author
 
