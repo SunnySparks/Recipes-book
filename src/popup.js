@@ -1,11 +1,11 @@
 import './popupStyle.css';
 
 import ApiData from './mealAPI.js';
-import commentsApi, { LikesAPI } from './involvementAPI';
+import commentsApi from './involvementAPI';
 
 const wrapper = document.querySelector('.main-container');
-//const footer = document.getElementsByClassName('py-3');
-//const comments = ['one', 'two', 'three'];
+// const footer = document.getElementsByClassName('py-3');
+// const comments = ['one', 'two', 'three'];
 const appID = 'saW1s3gzIypFllIkOa1E';
 
 const popUp = () => {
@@ -22,7 +22,7 @@ const popUp = () => {
   const dataList = document.createElement('ul');
   const commentlist = document.createElement('ul');
   const commentsTitle = document.createElement('h3');
-  commentsTitle.innerHTML = 'Comments';
+
   commentlist.append(commentsTitle);
 
   commentCont.classList.add('text-justify');
@@ -88,16 +88,17 @@ const popUp = () => {
 
     commentsApi.fetchRecipes(numero, appID).then((data) => {
       console.log(data);
-      
-
+      console.log(data.length);
       data.forEach((comment) => {
+        
+        commentsTitle.innerHTML = `Comments(${data.length})`;
         const commentText = comment.comment;
         const commentDate = comment.creation_date;
         const commentName = comment.username;
         const commentwrapper = document.createElement('li');
         commentwrapper.innerHTML += `
-        <li class="text-justify p-2">${commentDate} ${commentName}: ${commentText}</li>`
-         commentlist.appendChild(commentwrapper);
+        <li class="text-justify p-2">${commentDate} ${commentName}: ${commentText}</li>`;
+        commentlist.appendChild(commentwrapper);
       });
     });
 
@@ -161,7 +162,7 @@ const popUp = () => {
     inst.innerHTML += `${instructions}`;
     dataList.appendChild(inst);
 
-    //const array = Object.entries(info);
+    // const array = Object.entries(info);
 
     formCont.addEventListener('submit', (e) => {
       e.preventDefault();
