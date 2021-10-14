@@ -87,6 +87,7 @@ const popUp = () => {
 
     dataList.appendChild(comm);
 
+    const filler = () => {
     commentsApi.fetchRecipes(numero, appID).then((data) => {
       data.forEach((comment) => {
         
@@ -100,6 +101,9 @@ const popUp = () => {
         commentlist.appendChild(commentwrapper);
       });
     });
+    }
+
+    filler();
 
     const ingred = document.createElement('li');
     const ingredients = [
@@ -181,7 +185,8 @@ const popUp = () => {
           };
         await commentsApi.postComment(inputInformation, appID)
         .then( setTimeout(() => { 
-            document.location.reload(); }, 1500), );
+            commentwrapper.innerHTML = '';
+        filler(); }, 800), );
   });
 })
 
