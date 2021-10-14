@@ -11,4 +11,8 @@ const setLocalStorage = (LikedRecipes) => {
   localStorage.setItem('LikedRecipes', JSON.stringify(LikedRecipes));
 };
 
+<<<<<<< HEAD
 module.exports = { getLocalStorage, setLocalStorage };
+=======
+module.exports = { getLocalStorage, setLocalStorage };
+>>>>>>> development

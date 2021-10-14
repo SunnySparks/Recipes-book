@@ -4,7 +4,7 @@
 
 > A JavaScript application that uses a food API for showing and sharing recipes
 
-![screenshot]()
+![screenshot](./readme-img.png)
 
 Save your favorite food recipes, comment them and give them a like
 
@@ -40,6 +40,8 @@ To get a local copy up and running follow these simple example steps.
  Run `npx eslint .` for javascript linters.
 
  Run `npx stylelint "**/*.{css,scss}"` for style linters.
+
+<!-- ### Live Demo Server -->
 
 
 ## Author
