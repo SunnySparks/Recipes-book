@@ -1,16 +1,14 @@
 import './popupStyle.css';
 
-import ApiData from './mealAPI.js';
+import ApiData from './mealAPI';
 import commentsApi from './involvementAPI';
 
 const wrapper = document.querySelector('.main-container');
 // const footer = document.getElementsByClassName('py-3');
 // const comments = ['one', 'two', 'three'];
 const appID = 'saW1s3gzIypFllIkOa1E';
-const header = document.getElementsByClassName('header');
 
 const popUp = () => {
-
   const container = document.createElement('section');
   const popupCont = document.createElement('div');
   const popupBox = document.createElement('div');
@@ -24,6 +22,7 @@ const popUp = () => {
   const dataList = document.createElement('ul');
   const commentlist = document.createElement('ul');
   const commentsTitle = document.createElement('h3');
+  const commentwrapper = document.createElement('li');
 
   commentlist.append(commentsTitle);
 
@@ -88,20 +87,18 @@ const popUp = () => {
     dataList.appendChild(comm);
 
     const filler = () => {
-    commentsApi.fetchRecipes(numero, appID).then((data) => {
-      data.forEach((comment) => {
-        
-        commentsTitle.innerHTML = `Comments(${data.length})`;
-        const commentText = comment.comment;
-        const commentDate = comment.creation_date;
-        const commentName = comment.username;
-        const commentwrapper = document.createElement('li');
-        commentwrapper.innerHTML += `
+      commentsApi.fetchRecipes(numero, appID).then((data) => {
+        data.forEach((comment) => {
+          commentsTitle.innerHTML = `Comments(${data.length})`;
+          const commentText = comment.comment;
+          const commentDate = comment.creation_date;
+          const commentName = comment.username;
+          commentwrapper.innerHTML += `
         <li class="text-justify p-2">${commentDate} ${commentName}: ${commentText}</li>`;
-        commentlist.appendChild(commentwrapper);
+          commentlist.appendChild(commentwrapper);
+        });
       });
-    });
-    }
+    };
 
     filler();
 
@@ -167,7 +164,7 @@ const popUp = () => {
 
     // const array = Object.entries(info);
 
-    /*formCont.addEventListener('submit', (e) => {
+    /* formCont.addEventListener('submit', (e) => {
       e.preventDefault();
       const inputInformation = {
         item_id: numero,
@@ -175,20 +172,21 @@ const popUp = () => {
         comment: commentArea.value,
       };
       commentsApi.postComment(inputInformation, appID);
-    });*/
+    }); */
 
-    button.addEventListener('click', async () => { 
-        const inputInformation = {
-            item_id: numero,
-            username: nameInput.value,
-            comment: commentArea.value,
-          };
-        await commentsApi.postComment(inputInformation, appID)
-        .then( setTimeout(() => { 
-            commentwrapper.innerHTML = '';
-        filler(); }, 800), );
+    button.addEventListener('click', async () => {
+      const inputInformation = {
+        item_id: numero,
+        username: nameInput.value,
+        comment: commentArea.value,
+      };
+      await commentsApi.postComment(inputInformation, appID)
+        .then(setTimeout(() => {
+          commentwrapper.innerHTML = '';
+          filler();
+        }, 800));
+    });
   });
-})
 
   formInside.classList.add('row');
   formInside.append(nameInput, commentArea, buttonCont);
@@ -203,4 +201,4 @@ const popUp = () => {
   wrapper.appendChild(container);
 };
 
-export { popUp };
+export default popUp;

@@ -1,64 +1,60 @@
 body {
-    /*background-image: url('../img/bg.png');*/
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: rgb(132, 191, 237);
+  /* background-image: url('../img/bg.png'); */
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(132, 191, 237);
 }
 
 header,
 footer {
-    z-index: 0;
+  z-index: 0;
 }
 
 .comment-btn {
-    background-color: rgb(132, 191, 237);
-    color: white;
+  background-color: rgb(132, 191, 237);
+  color: white;
 }
 
 .recipe-container {
-    list-style: none;
+  list-style: none;
 }
-
-.dishContainer{
-    background-color: rgba(220, 53, 69, 0.616)
-}
-
 
 .dishContainer {
-    max-width: 200px;
+  background-color: rgba(220, 53, 69, 0.616);
+  max-width: 200px;
 }
 
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: red;
-    color: white;
-    text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
 }
 
 .popup {
-    background-color: rgba(52, 58, 64);
-    color: white;
-    background-image: url('./img/bg.png');
-    z-index: 5;
+  background-color: rgba(52, 58, 64);
+  color: white;
+  background-image: url('./img/bg.png');
+  z-index: 5;
 }
 
 .popup-cont {
-    max-width: 45rem;
+  max-width: 45rem;
 }
 
 .bigFood {
-    max-width: 40rem;
+  max-width: 40rem;
 }
 
 #form-c {
-    display: inline;
-    width: 80%;
+  display: inline;
+  width: 80%;
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
