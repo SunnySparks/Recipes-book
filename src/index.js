@@ -1,18 +1,15 @@
-import popUp from './popup';
 import './style.css';
-
+import popUp from './popup';
 import displayList from './listItems';
 import LikesAPI from './involvementAPI';
 import { getLocalStorage, setLocalStorage } from './loadStorage';
-
-popUp();
 
 const APP_ID = 'saW1s3gzIypFllIkOa1E';
 
 const likedRecipes = getLocalStorage();
 
-const randomDishesBtn = document.querySelector('#random-dishes');
 const recipesPageBtn = document.querySelector('#recipes');
+const footer = document.querySelector('.footer');
 
 const refreshLikes = (foodId, index) => {
   LikesAPI.refreshItemLikes(APP_ID, foodId).then((data) => {
@@ -56,14 +53,29 @@ document.addEventListener('DOMContentLoaded', () => {
           );
       });
     });
-  });
-
-  randomDishesBtn.addEventListener('click', async () => {
+    const commentButtons = document.querySelectorAll('#comment-button');
     const listItemsContainer = document.querySelector('.container');
-    await listItemsContainer.classList.add('d-none');
+    commentButtons.forEach((btn, index) => {
+      const { foodId } = likedRecipes[index];
+      btn.addEventListener('click', async () => {
+        const popContainer = listItemsContainer.nextSibling;
+        if (popContainer !== null) {
+          popContainer.remove();
+        }
+        popUp(foodId);
+        footer.classList.remove('d-flex');
+        footer.classList.add('d-none');
+        listItemsContainer.classList.add('recipe-section');
+        document.body.style.overflow = 'hidden';
+      });
+    });
   });
-  recipesPageBtn.addEventListener('click', async () => {
+  recipesPageBtn.addEventListener('click', () => {
     const listItemsContainer = document.querySelector('.container');
-    await listItemsContainer.classList.remove('d-none');
+    const popContainer = listItemsContainer.nextSibling;
+    popContainer.remove();
+    footer.classList.add('d-flex');
+    footer.classList.remove('d-none');
+    listItemsContainer.classList.remove('recipe-section');
   });
 });

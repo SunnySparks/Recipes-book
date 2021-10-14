@@ -6,12 +6,17 @@ import commentsApi from './commentsAPI';
 const wrapper = document.querySelector('.main-container');
 const appID = 'saW1s3gzIypFllIkOa1E';
 
-const popUp = () => {
+const popUp = (foodId) => {
+  const parentContainer = document.createElement('div');
   const container = document.createElement('section');
   const popupCont = document.createElement('div');
   const popupBox = document.createElement('div');
   const title = document.createElement('h4');
   const photo = document.createElement('IMG');
+
+  parentContainer.classList.add('parent-container');
+  title.classList.add('popup-title');
+  photo.classList.add('popup-img');
 
   popupBox.classList.add('ml-auto', 'mr-auto', 'pb-5');
   popupBox.append(title, photo);
@@ -21,6 +26,8 @@ const popUp = () => {
   const commentlist = document.createElement('ul');
   const commentsTitle = document.createElement('h3');
   const commentwrapper = document.createElement('li');
+
+  dataList.classList.add('popup-info');
 
   commentlist.append(commentsTitle);
 
@@ -55,7 +62,7 @@ const popUp = () => {
   commentArea.setAttribute('placeholder', 'Leave a comment');
   commentArea.classList.add('form-control', 'm-2', 'form-c');
 
-  ApiData.getMeal('52796').then((data) => {
+  ApiData.getMeal(foodId).then((data) => {
     const info = data.meals[0];
     const foodName = info.strMeal;
     const foodImg = info.strMealThumb;
@@ -69,6 +76,8 @@ const popUp = () => {
     photo.src = foodImg;
 
     const comm = document.createElement('li');
+
+    comm.classList.add('popup-tags');
 
     if (foodTag !== null) {
       const splitTags = foodTag.split(',');
@@ -85,70 +94,57 @@ const popUp = () => {
 
     const filler = () => {
       commentsApi.fetchRecipes(numero, appID).then((data) => {
-        data.forEach((comment) => {
-          commentsTitle.innerHTML = `Comments(${data.length})`;
-          const commentText = comment.comment;
-          const commentDate = comment.creation_date;
-          const commentName = comment.username;
-          commentwrapper.innerHTML += `
-        <li class="text-justify p-2">${commentDate} ${commentName}: ${commentText}</li>`;
-          commentlist.appendChild(commentwrapper);
-        });
+        try {
+          data.forEach((comment) => {
+            commentsTitle.innerHTML = `Comments(${data.length})`;
+            const commentText = comment.comment;
+            const commentDate = comment.creation_date;
+            const commentName = comment.username;
+            commentwrapper.innerHTML += `
+              <li class="text-justify p-2">${commentDate} ${commentName}: ${commentText}</li>`;
+            commentlist.appendChild(commentwrapper);
+          });
+        } catch {
+          console.log('Recipe without comments');
+        }
       });
     };
 
     filler();
 
     const ingred = document.createElement('li');
+    ingred.classList.add('popup-ingred');
     const ingredients = [
-      [info.strIngredient1,
-        info.strMeasure1],
-      [info.strIngredient2,
-        info.strMeasure2],
-      [info.strIngredient3,
-        info.strMeasure3],
-      [info.strIngredient4,
-        info.strMeasure4],
-      [info.strIngredient5,
-        info.strMeasure5],
-      [info.strIngredient6,
-        info.strMeasure6],
-      [info.strIngredient7,
-        info.strMeasure7],
-      [info.strIngredient8,
-        info.strMeasure8],
-      [info.strIngredient9,
-        info.strMeasure9],
-      [info.strIngredient10,
-        info.strMeasure10],
-      [info.strIngredient11,
-        info.strMeasure11],
-      [info.strIngredient12,
-        info.strMeasure12],
-      [info.strIngredient13,
-        info.strMeasure13],
-      [info.strIngredient14,
-        info.strMeasure14],
-      [info.strIngredient15,
-        info.strMeasure15],
-      [info.strIngredient16,
-        info.strMeasure16],
-      [info.strIngredient17,
-        info.strMeasure17],
-      [info.strIngredient18,
-        info.strMeasure18],
-      [info.strIngredient19,
-        info.strMeasure19],
-      [info.strIngredient20,
-        info.strMeasure20],
+      [info.strIngredient1, info.strMeasure1],
+      [info.strIngredient2, info.strMeasure2],
+      [info.strIngredient3, info.strMeasure3],
+      [info.strIngredient4, info.strMeasure4],
+      [info.strIngredient5, info.strMeasure5],
+      [info.strIngredient6, info.strMeasure6],
+      [info.strIngredient7, info.strMeasure7],
+      [info.strIngredient8, info.strMeasure8],
+      [info.strIngredient9, info.strMeasure9],
+      [info.strIngredient10, info.strMeasure10],
+      [info.strIngredient11, info.strMeasure11],
+      [info.strIngredient12, info.strMeasure12],
+      [info.strIngredient13, info.strMeasure13],
+      [info.strIngredient14, info.strMeasure14],
+      [info.strIngredient15, info.strMeasure15],
+      [info.strIngredient16, info.strMeasure16],
+      [info.strIngredient17, info.strMeasure17],
+      [info.strIngredient18, info.strMeasure18],
+      [info.strIngredient19, info.strMeasure19],
+      [info.strIngredient20, info.strMeasure20],
     ];
 
-    const filteredIng = ingredients.filter((ingredient) => ingredient[0] !== '');
+    const filteredIng = ingredients.filter(
+      (ingredient) => ingredient[0] !== '',
+    );
 
     filteredIng.forEach((element) => {
       const ingredContainer = document.createElement('p');
       ingredContainer.innerHTML += `
-            ${element[0]}: ${element[1]}.
+             * ${element[0]}: ${element[1]}.
             `;
       ingred.appendChild(ingredContainer);
     });
@@ -165,11 +161,11 @@ const popUp = () => {
         username: nameInput.value,
         comment: commentArea.value,
       };
-      await commentsApi.postComment(inputInformation, appID)
-        .then(setTimeout(() => {
-          commentwrapper.innerHTML = '';
-          filler();
-        }, 800));
+      await commentsApi.postComment(inputInformation, appID).then(
+        setTimeout(() => {
+          document.location.reload();
+        }, 1500),
+      );
     });
   });
 
@@ -183,7 +179,8 @@ const popUp = () => {
   container.classList.add('container', 'popup');
 
   container.append(popupCont, socialCont);
-  wrapper.appendChild(container);
+  parentContainer.appendChild(container);
+  wrapper.appendChild(parentContainer);
 };
 
 export default popUp;
