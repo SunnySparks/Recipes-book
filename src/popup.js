@@ -179,10 +179,11 @@ const popUp = () => {
             username: nameInput.value,
             comment: commentArea.value,
           };
-        await commentsApi.postComment(inputInformation, appID); })
+        await commentsApi.postComment(inputInformation, appID)
         .then( setTimeout(() => { 
             document.location.reload(); }, 1500), );
   });
+})
 
   formInside.classList.add('row');
   formInside.append(nameInput, commentArea, buttonCont);
