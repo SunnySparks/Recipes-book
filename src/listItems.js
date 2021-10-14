@@ -58,7 +58,7 @@ export default async function displayList(likedRecipes) {
             </div>
           </div>
       <button id="comment-button" type="button" class="nav-link badge">Comments</button>
-      <button id="comment-button" type="button" class="nav-link badge">Reservations</button>
+      <button id="reservation-button" type="button" class="nav-link badge">Reservations</button>
       `;
     aboutRecipeContainer.classList.add('description');
     li.appendChild(recipeMainContainer);

@@ -3,6 +3,10 @@ body {
   background-image: url('./img/bg-image.png');
 }
 
+.d-none {
+  display: none;
+}
+
 .container {
   display: flex;
   justify-content: center;

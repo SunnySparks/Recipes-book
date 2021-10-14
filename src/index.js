@@ -8,6 +8,9 @@ const APP_ID = 'saW1s3gzIypFllIkOa1E';
 
 const likedRecipes = getLocalStorage();
 
+const randomDishesBtn = document.querySelector('#random-dishes');
+const recipesPageBtn = document.querySelector('#recipes');
+
 const refreshLikes = (foodId, index) => {
   LikesAPI.refreshItemLikes(APP_ID, foodId).then((data) => {
     likedRecipes[index].likes = data.likes;
@@ -46,9 +49,25 @@ document.addEventListener('DOMContentLoaded', () => {
           .then(
             setTimeout(() => {
               document.location.reload();
-            }, 1500),
+            }, 1500)
           );
       });
     });
+    const commentButtons = document.querySelectorAll('#comment-button');
+    commentButtons.forEach((btn, index) => {
+      const { foodId } = likedRecipes[index];
+      btn.addEventListener('click', async () => {
+        // console.log(`Passing parameter Food Id: ${foodId}`);
+      })
+    })
   });
+
+  randomDishesBtn.addEventListener('click', async () => {
+    const listItemsContainer = document.querySelector('.container');
+    await listItemsContainer.classList.add('d-none');
+  });
+  recipesPageBtn.addEventListener('click', async () => {
+    const listItemsContainer = document.querySelector('.container');
+    await listItemsContainer.classList.remove('d-none');
+  })
 });
