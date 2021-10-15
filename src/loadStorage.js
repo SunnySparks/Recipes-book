@@ -1,4 +1,4 @@
-const getLocalStorage = () => {
+export const getLocalStorage = () => {
   const data = JSON.parse(localStorage.getItem('LikedRecipes'));
   if (data === null) {
     localStorage.setItem('LikedRecipes', JSON.stringify([]));
@@ -7,8 +7,6 @@ const getLocalStorage = () => {
   return data;
 };
 
-const setLocalStorage = (LikedRecipes) => {
+export const setLocalStorage = (LikedRecipes) => {
   localStorage.setItem('LikedRecipes', JSON.stringify(LikedRecipes));
 };
-
-module.exports = { getLocalStorage, setLocalStorage };

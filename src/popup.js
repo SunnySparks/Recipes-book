@@ -125,7 +125,7 @@ const popUp = (foodId) => {
             commentlist.appendChild(commentwrapper);
           });
         } catch {
-          console.log('Recipe without comments');
+          data = [];
         }
       });
     };

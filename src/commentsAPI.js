@@ -1,4 +1,4 @@
-class commentsApi {
+export default class commentsApi {
     static fetchRecipes = (item, appID) => new Promise((resolve, reject) => {
       if (resolve) {
         return resolve(
@@ -24,5 +24,3 @@ class commentsApi {
       } return reject();
     });
 }
-
-module.exports = commentsApi;
