@@ -64,23 +64,29 @@ const popUp = (foodId) => {
   const formInside = document.createElement('div');
   const buttonCont = document.createElement('div');
 
-  const button = document.createElement('button');
-  button.innerHTML += 'Add Comment';
-  button.classList.add('nav-link', 'comment-btn', 'align-middle', 'p-1');
+  const AddCommentbutton = document.createElement('button');
+  AddCommentbutton.innerHTML += 'Add Comment';
+  AddCommentbutton.type = 'submit';
+  AddCommentbutton.classList.add(
+    'nav-link',
+    'comment-btn',
+    'align-middle',
+    'p-1',
+  );
 
   buttonCont.classList.add('column', 'pt-2', 'ml-2', 'mr-2');
-  buttonCont.appendChild(button);
+  buttonCont.appendChild(AddCommentbutton);
 
   const nameInput = document.createElement('input');
-  nameInput.required = true;
   nameInput.setAttribute('id', 'nameInput');
   nameInput.setAttribute('placeholder', 'Name');
   nameInput.classList.add('form-control', 'm-2');
+  nameInput.required = true;
   const commentArea = document.createElement('textarea');
-  commentArea.required = true;
   commentArea.setAttribute('id', 'comment');
   commentArea.setAttribute('placeholder', 'Leave a comment');
   commentArea.classList.add('form-control', 'm-2', 'form-c');
+  commentArea.required = true;
 
   ApiData.getMeal(foodId).then((data) => {
     const info = data.meals[0];
@@ -175,17 +181,19 @@ const popUp = (foodId) => {
     inst.innerHTML += `${instructions}`;
     dataList.appendChild(inst);
 
-    button.addEventListener('click', async () => {
+    AddCommentbutton.addEventListener('click', async () => {
       const inputInformation = {
         item_id: numero,
         username: nameInput.value,
         comment: commentArea.value,
       };
-      await commentsApi.postComment(inputInformation, appID).then(
-        setTimeout(() => {
-          document.location.reload();
-        }, 1500),
-      );
+      if (inputInformation.username !== '' && inputInformation.comment !== '') {
+        await commentsApi.postComment(inputInformation, appID).then(
+          setTimeout(() => {
+            document.location.reload();
+          }, 1000),
+        );
+      }
     });
   });
 

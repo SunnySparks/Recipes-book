@@ -80,3 +80,15 @@ body {
   flex-direction: column;
   float: right;
 }
+
+#comment-button:hover {
+  background-color: grey;
+  color: white;
+  box-shadow: 0 0 11px grey;
+}
+
+#reservation-button:hover {
+  background-color: grey;
+  color: white;
+  box-shadow: 0 0 11px grey;
+}

@@ -58,10 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     commentButtons.forEach((btn, index) => {
       const { foodId } = likedRecipes[index];
       btn.addEventListener('click', async () => {
-        const popContainer = listItemsContainer.nextSibling;
-        if (popContainer !== null) {
-          popContainer.remove();
-        }
         popUp(foodId);
         footer.classList.remove('d-flex');
         footer.classList.add('d-none');
