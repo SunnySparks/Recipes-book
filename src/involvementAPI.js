@@ -1,6 +1,6 @@
 export default class LikesAPI {
   static giveLike = async (appId, itemId) => {
-    await fetch(
+    const res = fetch(
       `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/likes`,
       {
         method: 'POST',
@@ -11,7 +11,9 @@ export default class LikesAPI {
           'Content-type': 'application/json; charset=UTF-8',
         },
       },
-    ).then((response) => response.status);
+    );
+    const data = await res.status;
+    return data;
   };
 
   static refreshItemLikes = async (appId, itemId) => {

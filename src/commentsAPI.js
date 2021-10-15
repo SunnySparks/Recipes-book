@@ -1,11 +1,10 @@
 export default class commentsApi {
   static fetchRecipes = async (item, appID) => {
-    const res = () => fetch(
+    const res = fetch(
       `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appID}/comments?item_id=${item}`,
-    )
-      .then((res) => res.json())
-      .then((json) => json);
-    const data = await res();
+    );
+    let data = await res;
+    data = data.json();
     return data;
   };
 

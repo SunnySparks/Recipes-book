@@ -2,7 +2,7 @@ import ApiData from './mealAPI';
 import { setLocalStorage } from './loadStorage';
 import counter from './counterItem';
 
-export default async function displayList(likedRecipes) {
+const displayList = async (likedRecipes) => {
   let n = 0;
   const max = 30;
   const min = 3;
@@ -72,4 +72,6 @@ export default async function displayList(likedRecipes) {
   listContainer.appendChild(ul);
   mainContainer.appendChild(listContainer);
   return n;
-}
+};
+
+export default displayList;
